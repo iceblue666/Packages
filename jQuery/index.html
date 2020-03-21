@@ -9,6 +9,8 @@
     <div>aa</div>
     <div>bb</div>
     <div>cc</div>
+    <div class="header">hah</div>
+    <input type="text" id="inputId">
 </body>
 <script>
     (function(global){
@@ -20,7 +22,9 @@
         }
 
         function F(selector){
-            const elements = document.getElementsByTagName(selector);
+            // jQuery 内部封装一个Sizzle引擎DOM元素
+
+            const elements = document.querySelectorAll(selector);
             this.elements = elements;
         }
 
@@ -41,6 +45,7 @@
 
 
     $("div").css("color","red");
-
+    $('.header').css("background","pink");
+    $('#inputId').css('background','red');
 </script>
 </html>
