@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div>aa</div>
+    <div>bb</div>
+    <div>cc</div>
 </body>
 <script>
     (function(global){
@@ -14,12 +16,31 @@
             // 1. 获取页面所有元素
             // 2. 把这个元素放到一个对象中
     
-            
+            return new F(selector);
         }
+
+        function F(selector){
+            const elements = document.getElementsByTagName(selector);
+            this.elements = elements;
+        }
+
+        F.prototype.css = function(name, value) {
+            for(let i = 0; i < this.elements.length; i++){
+                let element = this.elements[i];
+                element.style[name] = value;
+            }
+        }
+
+
+
         //global.jQuery = jQuery;
         //global.$ = jQuery;
 
         global.$ = global.jQuery = jQuery;
     })(window)
+
+
+    $("div").css("color","red");
+
 </script>
 </html>
