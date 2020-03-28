@@ -86,10 +86,10 @@
     //global.jQuery = jQuery;
     //global.$ = jQuery;
 
-    // $.each([1,9,6,3],function(index,value){})
-    // $.each({name:"Hello",age:18},function(key,value){})
-    // $.each工具类：遍历对象或者数组
     jQuery.extend({
+        // $.each([1,9,6,3],function(index,value){})
+        // $.each({name:"Hello",age:18},function(key,value){})
+        // $.each工具类：遍历对象或者数组
         each(obj, callback){
             // 有两种情况
             // 数组和对象
@@ -107,6 +107,11 @@
                     callback.call(obj[i], i, obj[i]);
                 }
             }
+        },
+        // $.type(1) --> "number"
+        type(data){
+            var type = Object.prototype.toString.call(data);
+            return type.replace("[object ", "").replace("]", "").toLowerCase();
         }
     })
 

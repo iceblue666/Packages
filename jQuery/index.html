@@ -17,22 +17,27 @@
 
 
 
-    $("div").css("color","red");
-    $('.header').css("background","pink");
-    $('#inputId').css('background','red');
+    // $("div").css("color","red");
+    // $('.header').css("background","pink");
+    // $('#inputId').css('background','red');
 
     
-    $.each({0:100,1:200,2:300,length:3}, function(index,value){
-        console.log(this);
-        console.log(index,value);
-    });
-    $.each({0:"哈哈哈", name:"lla",length:-1}, function(index,value){
-        console.log(this);
-        console.log(index,value);
-    });
+    // $.each({0:100,1:200,2:300,length:3}, function(index,value){
+    //     console.log(this);
+    //     console.log(index,value);
+    // });
+    // $.each({0:"哈哈哈", name:"lla",length:-1}, function(index,value){
+    //     console.log(this);
+    //     console.log(index,value);
+    // });
 
-    $("div").each(function(index,element){
-        console.log(index, element);
-    })
+    // $("div").each(function(index,element){
+    //     console.log(index, element);
+    // })
+
+    console.log($.type(1));
+    console.log($.type({a:1}));
+    console.log($.type([1]));
+    console.log($.type(function(){}));
 </script>
 </html>
