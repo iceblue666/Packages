@@ -39,15 +39,15 @@
 
         source = [...args];
         // 判断是谁调用
-        if(this === jQuery){
+        if(source.length === 1){
             // $.extend
+            target = this;
+        }
+        else{
+
             target = args[0];
             
             source.splice(0,1);
-        }
-        else{
-            // $.fn.extend
-            target = this;
             
         }
 
@@ -62,10 +62,31 @@
         return target;
     }
 
+    // 授人以鱼不如授人以渔
+    // $.ajax等工具类方法
+    // jQuery.extend({
+    //     each:function(){
+    //         console.log("each");
+    //     },
+    //     ajax:function(){
+    //         console.log("ajax");
+    //     }
+    // })
 
+    // $("")对象的方法
+    // jQuery.fn.extend({
+    //     attr(){
+
+    //     },
+    //     on(){
+
+    //     }
+    // })
 
     //global.jQuery = jQuery;
     //global.$ = jQuery;
+
+
 
     global.$ = global.jQuery = jQuery;
 })(window)
