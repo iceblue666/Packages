@@ -86,7 +86,29 @@
     //global.jQuery = jQuery;
     //global.$ = jQuery;
 
+    // $.each([1,9,6,3],function(index,value){})
+    // $.each({name:"Hello",age:18},function(key,value){})
+    // $.each工具类：遍历对象或者数组
+    jQuery.extend({
+        each(obj, callback){
+            // 有两种情况
+            // 数组和对象
 
+            // Object.prototype.toString(obj) === "[object Array]")可以判断数组
+            // 但是不能判断伪数组，如{0:100, length:1}
+            // 判断的方法就是是否含有length属性，且值>=0
+            if((length in obj) && (obj.length >= 0)){
+                for(let i = 0; i < obj.length; i++){
+                    callback.call(obj[i], i, obj[i]);
+                }
+            }
+            else{
+                for(let i in obj){
+                    callback.call(obj[i], i, obj[i]);
+                }
+            }
+        }
+    })
 
     global.$ = global.jQuery = jQuery;
 })(window)
