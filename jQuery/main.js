@@ -23,13 +23,8 @@
             }
             this.length = elements.length;
             
-        },
-        css(name, value) {
-            for(let i = 0; i < this.length; i++){
-                let element = this[i];
-                element.style[name] = value;
-            }
         }
+
     }
 
     jQuery.prototype.init.prototype = jQuery.prototype;
@@ -107,6 +102,8 @@
                     callback.call(obj[i], i, obj[i]);
                 }
             }
+
+            return this;
         },
         // $.type(1) --> "number"
         type(data){
@@ -115,10 +112,76 @@
         }
     })
 
+    // CSS样式类方法
+    jQuery.fn.extend({
+
+        // 1. 获取样式$("div").css("color") 只能获取到第一个div的颜色
+        // 2. 设置样式
+        //      $("div").css("color","red")
+        //      $("div").css({"color":"red","backgroundColor":"blue"})
+        css(...args) {
+            var arg1 = args[0],
+                arg2 = args[1];
+            if(args.length === 1){
+                // 参数个数 1
+                if(jQuery.type(arg1) === "string"){
+                    // a. 获取样式:只获取第一个元素的样式
+                    let firstDom = this[0];
+                    // 错误示例，style的方法只能获取行内样式
+                    // return firstDom.style[arg1];
+                    let domStyleObj = window.getComputedStyle(firstDom,null);
+                    return domStyleObj[arg1];
+                }
+                else{
+                    // b. 设置多个样式 是一个对象
+                    // this.each(function(index, dom){
+                    //     // jQuery.each(arg1, (key, value)=>{
+                    //     //     this.style[key] = value;
+                    //     // })
+                    // })
+                    var _that = this;
+                    // 优化一下
+                    jQuery.each(arg1, function(key, value) {
+                        _that.css(key,value);
+                    })
+
+                    return _that;
+                }
+
+            }
+            else{
+                // 参数个数 2 设置每一个元素的单个样式
+
+                // this.each(function(index, dom){
+                //     this.style[arg1] = arg2;
+                // })
+                // return this;
+
+                // 优化一下:在each方法中最后返回this
+                return this.each(function(index, dom){
+                    this.style[arg1] = arg2;
+                })
+            }
+        },
+        show(){
+            // 让所有元素显示
+            return this.css("display", "block");
+        },
+        hide(){
+            return this.css("display", "none");
+        },
+        toggle(){
+            // this.each(function(){
+            //     if($(this).css("display"))
+            // })
+        }
+    })
+
     jQuery.fn.extend({
         each(callback){
-            jQuery.each(this, callback)
+            jQuery.each(this, callback);
         }
+
     })
 
     global.$ = global.jQuery = jQuery;
