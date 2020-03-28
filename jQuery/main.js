@@ -11,17 +11,28 @@
     jQuery.fn = jQuery.prototype = {
         constructor:jQuery,
         init:function(selector){
-            // jQuery 内部封装一个Sizzle引擎DOM元素
+            if(jQuery.type(selector) === "string"){
     
-            const elements = document.querySelectorAll(selector);
-    
-            // jQuery为了操作方便，实际上是把元素变成一个数组绑定在自己身上，可以用for遍历，这样的对象特性就是【伪数组】
-    
-            for(let i = 0;i < elements.length; i++){
-                var ele = elements[i]
-                this[i] = ele;
+                // jQuery 内部封装一个Sizzle引擎DOM元素
+        
+                const elements = document.querySelectorAll(selector);
+        
+                // jQuery为了操作方便，实际上是把元素变成一个数组绑定在自己身上，可以用for遍历，这样的对象特性就是【伪数组】
+        
+                for(let i = 0;i < elements.length; i++){
+                    var ele = elements[i]
+                    this[i] = ele;
+                }
+                this.length = elements.length;
+
             }
-            this.length = elements.length;
+            else{
+                // 为了把一个DOM元素转化成jQuery对象
+                this[0] = selector;
+                this.length = 1;
+
+            }
+
             
         }
 
