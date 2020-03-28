@@ -110,5 +110,11 @@
         }
     })
 
+    jQuery.fn.extend({
+        each(callback){
+            jQuery.each(this, callback)
+        }
+    })
+
     global.$ = global.jQuery = jQuery;
 })(window)
