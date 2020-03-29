@@ -182,9 +182,29 @@
             return this.css("display", "none");
         },
         toggle(){
-            // this.each(function(){
-            //     if($(this).css("display"))
-            // })
+            return this.each(function(){
+                // if(jQuery(this).css("display") === "none"){
+                //     jQuery(this).show();
+                // }
+                // else{
+                //     jQuery(this).hide();
+                // }
+                // jQuery(this).css("display") === "none"?
+                //     jQuery(this).show():
+                //     jQuery(this).hide();
+
+                // 优化1
+                // let $this = jQuery(this);
+                // $this.css("display") === "none"?
+                //     this.show():
+                //     this.hide();
+
+                // 优化2
+                let $this = jQuery(this);
+                $this[$this.css("display") === "none"?"show":"hide"]();
+
+
+            })
         }
     })
 
@@ -194,6 +214,8 @@
         }
 
     })
+
+
 
     global.$ = global.jQuery = jQuery;
 })(window)
