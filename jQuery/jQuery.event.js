@@ -15,6 +15,8 @@
         on(type, callback){
             this.each(function(index, element){
                 element.addEventListener(type,callback);
+
+                events.push({ele:element, type, callback});
             })
 
             return this;
@@ -22,9 +24,18 @@
         // 解除绑定 $("").off("click")
         off(type){
             this.each(function(index, element){
-
-                element.removeEventListener(type);
+                
+                var evts = events.filter(function (obj) {  
+                    var isCurrent = obj.ele === element && obj.type === type;
+                    return isCurrent;
+                })
+                
+                evts.forEach(function(e){
+                    element.removeEventListener(type,e.callback);
+                })
             })
+
+            return this;
         }
     })
 
