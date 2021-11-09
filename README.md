@@ -1,2 +1,2 @@
 # Packages
-Some perfect packages I try to imitate myself for better and deeper understandings of JavaScript.
+A few ideal packages For a better and deeper grasp of JavaScript, I try to imitate by myself.
